@@ -17,11 +17,11 @@ inline fun <T> T?.ifNotNull(block: (T) -> Unit): T? {
     return this
 }
 
-inline fun <T, R> T?.evaluateNullable(onNull: () -> R, onNotNull: () -> R): R {
+inline fun <T, R> T?.evaluateNullable(onNull: () -> R, onNotNull: (T) -> R): R {
     return if (this == null)
         onNull()
     else
-        onNotNull()
+        onNotNull(this)
 }
 
 inline fun <reified T> Any?.castOrNull(): T? {
