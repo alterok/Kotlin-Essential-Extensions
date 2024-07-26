@@ -1,8 +1,7 @@
 package com.alterok.kotlin_essential_extensions
 
-fun <T> T?.defaultIfNull(defaultValue: T): T {
-    return this ?: defaultValue
-}
+fun <T> T?.isNull() = this == null
+fun <T> T?.isNotNull() = this != null
 
 inline fun <T> T?.ifNull(block: () -> Unit): T? {
     if (this == null)
@@ -15,6 +14,10 @@ inline fun <T> T?.ifNotNull(block: (T) -> Unit): T? {
         block(this)
 
     return this
+}
+
+fun <T> T?.defaultIfNull(defaultValue: T): T {
+    return this ?: defaultValue
 }
 
 inline fun <T, R> T?.evaluateNullable(onNull: () -> R, onNotNull: (T) -> R): R {
